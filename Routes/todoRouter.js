@@ -31,7 +31,7 @@ todorouter.patch("/update/:id",async(req,res)=>{
         let data=await TodosModel.find({_id:noteid});
         if(data[0].user===userId){
             try {
-                let data=await TodosModel.findByIdAndUpdate({_id:id},req.body);
+                let data=await TodosModel.findByIdAndUpdate({_id:noteid},req.body);
                 res.send(data)
             } catch (error) {
                 res.send(error.message)
