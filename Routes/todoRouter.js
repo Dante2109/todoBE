@@ -23,7 +23,7 @@ todorouter.post("/create",async(req,res)=>{
     }
 })
 
-todorouter.patch("/update:id",async(req,res)=>{
+todorouter.patch("/update/:id",async(req,res)=>{
     let noteid=req.params.id;
     let userId=req.body.user;
     try {
