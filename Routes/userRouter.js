@@ -5,10 +5,12 @@ const {UserModel}=require("../Model/userSchema")
 const {authenticate}=require("../Middleware/authenticate")
 const userRouter=express.Router();
 
-userRouter.post("/register",(req,res)=>{
+userRouter.post("/register",async(req,res)=>{
     let data=req.body;
-    console.log("sjd")
-    try {
+    let count=await UserModel.count({email:data.email})
+    if(!count){
+
+        try {
         bcrypt.hash(data.pass, 5, async (err, hash)=>{
             if(err){
                 res.send(err.message)
@@ -22,6 +24,9 @@ userRouter.post("/register",(req,res)=>{
         console.log("ERror")
         res.send(error.message)
     }
+}else{
+    res.send("user already has been registered")
+}   
 })
 
 userRouter.post("/login",async(req,res)=>{
